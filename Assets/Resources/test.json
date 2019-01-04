@@ -1,6 +1,6 @@
 {"nodes":[
 {"id":"test-node1","label":"test-node1","group":"foo","level":1,"mass":0.5,"meta":{"repo":"flock"}},
-{"id":"test-node2","label":"test-node2","group":"bar","level":2,"mass":1,"meta":{"repo":"flock"}},
+{"id":"test-node2","label":"test-node2","group":"bar","level":2,"mass":1,"meta":{"repo":"flock"}}
 ],"edges":[
 {"from":"test-node1","to":"test-node2"}
 ]}

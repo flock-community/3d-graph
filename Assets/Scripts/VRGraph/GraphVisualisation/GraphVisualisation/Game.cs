@@ -10,6 +10,9 @@ namespace GraphVisualisation
     {
         public static Node<T>[] Nodes;
 
+        public void GenerateNodes(Graph g) {
+            // TODO: generate structure from graph
+        }
 
         public void Update()
         {
