@@ -9,23 +9,41 @@ namespace GraphVisualisation
 {
     class Game<T>
     {
-        public static Node<T>[] Nodes;
+        public static Dictionary<int, Node<T>> Nodes;
+        public float Stability = 10;
+        public bool Stable => Nodes.Values.Sum(node => node.Force.LengthSquared()) < Stability;
 
-        public void GenerateNodes(Graph g)
+        public Game(List<Tuple<int, int>> edges, Dictionary<int, T> nodes)
         {
-            // TODO: generate structure from graph
-
+            Dictionary<int, List<int>> edgesDict = new Dictionary<int, List<int>>();
+            foreach (Tuple<int, int> edge in edges)
+                if (edgesDict.ContainsKey(edge.Item1))
+                    edgesDict[edge.Item1].Add(edge.Item2);
+                else
+                    edgesDict.Add(edge.Item1, new List<int> { edge.Item2 });
+            init(edgesDict, nodes);
+        }
+        public Game(Dictionary<int, List<int>> edges, Dictionary<int, T> nodes)
+        {
+            init(edges, nodes);
+        }
+        
+        private void init(Dictionary<int, List<int>> edges, Dictionary<int, T> nodes)
+        {
+            Nodes = nodes.ToDictionary(kvp => kvp.Key, kvp => new Node<T>(kvp.Value, kvp.Key));
+            foreach (KeyValuePair<int, List<int>> kvp in edges)
+                Nodes[kvp.Key].InitEdges(Nodes, kvp.Value);
 
         }
 
         public void Update()
         {
-            for(int i = 0; i<Nodes.Length;i++)
+            foreach (int i in Nodes.Keys)
             {
-                Nodes[i].UpdateForce(Nodes);
+                Nodes[i].UpdateForce(Nodes.Values);
                 Nodes[i].UpdateSpeed();
             }
-            for (int i = 0; i < Nodes.Length; i++)
+            foreach (int i in Nodes.Keys)
                 Nodes[i].UpdatePosition();
         }
     }

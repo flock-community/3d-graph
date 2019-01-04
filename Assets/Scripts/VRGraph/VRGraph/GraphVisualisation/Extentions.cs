@@ -13,5 +13,9 @@ namespace GraphVisualisation
         {
             return iEnumerable.Select(func).Aggregate((a, b) => a + b);
         }
+        public static Vector3 Sum(this IEnumerable<Vector3> iEnumerable)
+        {
+            return iEnumerable.Aggregate((a, b) => a + b);
+        }
     }
 }

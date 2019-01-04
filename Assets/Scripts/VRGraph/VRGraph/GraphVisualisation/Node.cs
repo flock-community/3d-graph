@@ -16,7 +16,7 @@ namespace GraphVisualisation
             private set;
         }
         private Vector3 Speed;
-        private Vector3 Force;
+        public Vector3 Force;
         public readonly int Id;
         public readonly List<Edge<T>> Edges;
         private Node<T>[] Neighbours => Edges.Select(e => e.OtherSide(this)).ToArray();
@@ -28,9 +28,9 @@ namespace GraphVisualisation
             Edges = new List<Edge<T>>();
         }
 
-        public void InitEdges(Node<T>[] nodes, int[] edgeIds)
+        public void InitEdges(Dictionary<int, Node<T>> nodes, List<int> neighbourIds)
         {
-            Node<T>[] neighbours = nodes.Where(node => edgeIds.Contains(node.Id)).ToArray();
+            Node<T>[] neighbours = neighbourIds.Select(id => nodes[id]).ToArray();
             neighbours = neighbours.Where(node => !node.Neighbours.Contains(this)).ToArray();
             for (int x = 0; x < neighbours.Length; x++)
             {
@@ -40,12 +40,11 @@ namespace GraphVisualisation
             }
         }
 
-
         public Vector3 GetRepellingForce(Node<T> other)
         {
             return getAttractingMagnitude(other) * (Position - other.Position);
         }
-        private float getRepellingMagnitude(Node<T> other)
+        protected virtual float getRepellingMagnitude(Node<T> other)
         {
             return 1 / (Position - other.Position).LengthSquared();
         }
@@ -53,11 +52,11 @@ namespace GraphVisualisation
         {
             return getAttractingMagnitude(other) * (Position - other.Position);
         }
-        private float getAttractingMagnitude(Node<T> other)
+        protected virtual float getAttractingMagnitude(Node<T> other)
         {
             return (Position - other.Position).LengthSquared();
         }
-        public void UpdateForce(Node<T>[] nodes)
+        public void UpdateForce(IEnumerable<Node<T>> nodes)
         {
             Force = nodes.Sum(node => node.GetRepellingForce(this));
             Force += Neighbours.Sum(node => node.GetAttractingForce(this));
