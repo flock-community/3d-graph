@@ -45,4 +45,7 @@
 sysinfo.txt
 
 # visual studio
-/.vs
+*/.vs
+*\.vs
+
+/Assets/Scripts/VRGraph/VRGraph/obj/

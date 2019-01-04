@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GraphVisualisation")]
+[assembly: AssemblyTitle("VRGraph")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("GraphVisualisation")]
+[assembly: AssemblyProduct("VRGraph")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("62550af2-b2af-4b5f-9246-4e30733b0aed")]
+[assembly: Guid("0ae5662e-cf48-4d57-9330-71b48d7c10d3")]
 
 // Version information for an assembly consists of the following four values:
 //
