@@ -9,7 +9,7 @@ namespace GraphVisualisation
 {
     public class Node<T>
     {
-        public T Content;
+        public readonly T Content;
         public Vector3 Position
         {
             get;
@@ -17,9 +17,31 @@ namespace GraphVisualisation
         }
         private Vector3 Speed;
         private Vector3 Force;
-        public int Id;
-        public Edge<T>[] Edges;
+        public readonly int Id;
+        public readonly List<Edge<T>> Edges;
         private Node<T>[] Neighbours => Edges.Select(e => e.OtherSide(this)).ToArray();
+        private readonly int[] edgeIds;
+
+        public Node(T content, int id, int[] edgeIds)
+        {
+            Content = content;
+            Id = id;
+            this.edgeIds = edgeIds;
+            Edges = new List<Edge<T>>();
+        }
+
+        public void Init(Node<T>[] nodes)
+        {
+            Node<T>[] neighbours = nodes.Where(node => edgeIds.Contains(node.Id)).ToArray();
+            neighbours = neighbours.Where(node => !node.Neighbours.Contains(this)).ToArray();
+            for (int x = 0; x < neighbours.Length; x++)
+            {
+                Edge<T> edge = new Edge<T>(this, neighbours[x]);
+                Edges.Add(edge);
+                neighbours[x].Edges.Add(edge);
+            }
+        }
+
 
         public Vector3 GetRepellingForce(Node<T> other)
         {
@@ -27,7 +49,7 @@ namespace GraphVisualisation
         }
         private float getRepellingMagnitude(Node<T> other)
         {
-            return 1/(Position - other.Position).LengthSquared();
+            return 1 / (Position - other.Position).LengthSquared();
         }
         public Vector3 GetAttractingForce(Node<T> other)
         {

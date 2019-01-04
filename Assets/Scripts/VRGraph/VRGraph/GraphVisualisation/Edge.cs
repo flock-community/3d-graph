@@ -11,6 +11,12 @@ namespace GraphVisualisation
         public Node<T> From;
         public Node<T> To;
 
+        public Edge(Node<T> from, Node<T> to)
+        {
+            From = from;
+            To = to;
+        }
+
         public Node<T> OtherSide(Node<T> node)
         {
             if (From == node)
