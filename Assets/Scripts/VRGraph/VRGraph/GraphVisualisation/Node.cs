@@ -20,17 +20,15 @@ namespace GraphVisualisation
         public readonly int Id;
         public readonly List<Edge<T>> Edges;
         private Node<T>[] Neighbours => Edges.Select(e => e.OtherSide(this)).ToArray();
-        private readonly int[] edgeIds;
 
-        public Node(T content, int id, int[] edgeIds)
+        public Node(T content, int id)
         {
             Content = content;
             Id = id;
-            this.edgeIds = edgeIds;
             Edges = new List<Edge<T>>();
         }
 
-        public void Init(Node<T>[] nodes)
+        public void InitEdges(Node<T>[] nodes, int[] edgeIds)
         {
             Node<T>[] neighbours = nodes.Where(node => edgeIds.Contains(node.Id)).ToArray();
             neighbours = neighbours.Where(node => !node.Neighbours.Contains(this)).ToArray();
