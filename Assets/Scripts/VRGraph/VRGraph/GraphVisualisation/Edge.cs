@@ -4,20 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GraphVisualisation
+namespace VRGraph.GraphVisualisation
 {
     public struct Edge<T>
     {
         public Node<T> From;
         public Node<T> To;
 
-        public Edge(Node<T> from, Node<T> to)
+        internal Edge(Node<T> from, Node<T> to)
         {
             From = from;
             To = to;
         }
 
-        public Node<T> OtherSide(Node<T> node)
+        internal Node<T> OtherSide(Node<T> node)
         {
             if (From == node)
                 return To;

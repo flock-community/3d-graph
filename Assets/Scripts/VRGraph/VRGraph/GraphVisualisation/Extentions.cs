@@ -5,7 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GraphVisualisation
+namespace VRGraph.GraphVisualisation
 {
     static class Extentions
     {

@@ -5,10 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
 
-namespace GraphVisualisation
+namespace VRGraph.GraphVisualisation
 {
     public class Node<T>
     {
+        public enum Feature { Mass }
+        public List<Feature> Features
+        {
+            get;
+            protected set;
+        }
         public readonly T Content;
         public Vector3 Position
         {
@@ -16,7 +22,7 @@ namespace GraphVisualisation
             private set;
         }
         private Vector3 Speed;
-        public Vector3 Force;
+        internal Vector3 Force;
         public readonly int Id;
         public readonly List<Edge<T>> Edges;
         private Node<T>[] Neighbours => Edges.Select(e => e.OtherSide(this)).ToArray();
@@ -26,6 +32,7 @@ namespace GraphVisualisation
             Content = content;
             Id = id;
             Edges = new List<Edge<T>>();
+            Features = null;
         }
 
         public void InitEdges(Dictionary<int, Node<T>> nodes, List<int> neighbourIds)

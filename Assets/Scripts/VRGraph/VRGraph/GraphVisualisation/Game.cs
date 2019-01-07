@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VRGraph.Json;
 
-namespace GraphVisualisation
+namespace VRGraph.GraphVisualisation
 {
     class Game<T>
     {

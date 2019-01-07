@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GraphVisualisation
+namespace VRGraph.GraphVisualisation
 {
     class Group<T>
     {
