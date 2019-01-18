@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Numerics;
+using VRGraph.Utilities;
 
 namespace VRGraph.GraphVisualisation
 {
@@ -50,6 +47,10 @@ namespace VRGraph.GraphVisualisation
             if (node == null)
                 return base.Equals(obj);
             return Id == node.Id && Content.Equals(node.Content);
+        }
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
         }
     }
 }

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VRGraph.Json;
+using VRGraph.Utilities;
 
 namespace VRGraph.GraphVisualisation
 {
@@ -42,17 +40,15 @@ namespace VRGraph.GraphVisualisation
         {
             if (random == null)
                 random = new Random();
-            float x = random.Next(0, 200) / 10000f;// location == -1 ? random.Next(0, 200)/10000 : location;
-            System.Numerics.Vector3 position = new System.Numerics.Vector3(x, 0, 0);
+            float r() => random.Next(0, 200) / 10000f;
+            Vector3 position = new Vector3(r(), r(), r());
             return new MovingObjectWithResistance(new MovingObject(position));
         }
 
         public void Update()
         {
             foreach (int i in Nodes.Keys)
-            {
                 Nodes[i].UpdateForce(Nodes.Values);
-            }
             foreach (int i in Nodes.Keys)
                 Nodes[i].UpdatePosition(DeltaTime);
         }

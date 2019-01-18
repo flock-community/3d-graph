@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace VRGraph.GraphVisualisation
 {
@@ -20,12 +15,17 @@ namespace VRGraph.GraphVisualisation
         internal override float getRepellingMagnitude(MovableObject other)
         {
             MovingObjectWithMass _other = other as MovingObjectWithMass;
-            return _other.Mass * movableObject.getRepellingMagnitude(_other);
+            return Mass * _other.Mass * movableObject.getRepellingMagnitude(_other);
         }
         internal override float getAttractingMagnitude(MovableObject other)
         {
             MovingObjectWithMass _other = other as MovingObjectWithMass;
-            return _other.Mass * movableObject.getAttractingMagnitude(_other);
+            return Mass * _other.Mass * movableObject.getAttractingMagnitude(_other);
+        }
+        public override void UpdateForce(IEnumerable<MovableObject> attractingNodes, IEnumerable<MovableObject> repellingNodes)
+        {
+            base.UpdateForce(attractingNodes, repellingNodes);
+            Force /= Mass;
         }
     }
 }

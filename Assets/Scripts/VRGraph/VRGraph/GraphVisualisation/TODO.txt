@@ -1,6 +1,4 @@
 ﻿TODO:
 	Extract GraphVisualisation as a class library/project. (To keep using the System.Numerics.Vectors.Vector3 class and avoid other unity-fication.)
-	MovableObject
-		build subclass with restriction on speed/force
 	Game
 		implement base locations
