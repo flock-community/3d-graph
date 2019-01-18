@@ -7,7 +7,7 @@ namespace VRGraph.GraphVisualisation
 {
     public class Game<T>
     {
-        public static Dictionary<int, Node<T>> Nodes;
+        public Dictionary<int, Node<T>> Nodes;
         private static Random random;
         public float Stability = 10;
         public static float DeltaTime = 0.3f;

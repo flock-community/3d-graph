@@ -15,7 +15,8 @@ namespace VRGraph.GraphVisualisation
             MovingObject _other = other as MovingObject;
             if (_other == null)
                 throw new ArgumentException("To use forces, please make sure this obj: " + this + " and the other " + other + " are of the same sub-type.");
-            return 1 / (Position - _other.Position).LengthSquared();
+            Vector3 difference = (Position - _other.Position);
+            return difference.LengthSquared() == 0 ? 0 : 1 / difference.LengthSquared();
         }
         internal override float getAttractingMagnitude(MovableObject other)
         {

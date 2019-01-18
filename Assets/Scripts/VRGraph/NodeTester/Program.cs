@@ -17,6 +17,7 @@ namespace NodeTester
             edges.Add(new Tuple<int, int>(0, 5));
             edges.Add(new Tuple<int, int>(0, 6));
             edges.Add(new Tuple<int, int>(0, 7));
+            edges.Add(new Tuple<int, int>(0, 8));
             nodes.Add(0, 0);
             nodes.Add(1, 1);
             nodes.Add(2, 2);
@@ -25,9 +26,9 @@ namespace NodeTester
             nodes.Add(5, 5);
             nodes.Add(6, 6);
             nodes.Add(7, 7);
+            nodes.Add(8, 8);
 
             Game<int> game = new Game<int>(edges, nodes);
-
 
             float numberOfUpdates = 30 / Game<string>.DeltaTime;
             for(int x = 0; x < numberOfUpdates; x++)
