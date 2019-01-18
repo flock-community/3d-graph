@@ -30,17 +30,18 @@ namespace VRGraph.GraphVisualisation
 
         private void init(Dictionary<int, List<int>> edges, Dictionary<int, T> nodes)
         {
-            Nodes = nodes.ToDictionary(kvp => kvp.Key, kvp => new Node<T>(kvp.Value, kvp.Key, generateMovableObject(kvp.Key)));
+            Nodes = nodes.ToDictionary(kvp => kvp.Key, kvp => new Node<T>(kvp.Value, kvp.Key, generateMovableObject(nodes.Count, kvp.Key)));
             foreach (KeyValuePair<int, List<int>> kvp in edges)
                 Nodes[kvp.Key].InitEdges(Nodes, kvp.Value);
         }
 
-        private MovableObject generateMovableObject(float location = -1)
+        private MovableObject generateMovableObject(int nodes, float location = -1)
         {
             if (random == null)
                 random = new System.Random();
-            System.Func<float> r = () => random.Next(0, 200) / 10000f;
-            Vector3 position = new Vector3(r(), r(), r());
+            System.Func<float> ry = () => random.Next(0, nodes);
+            System.Func<float> r = () => random.Next(-nodes/2, nodes/2 + 1);
+            Vector3 position = new Vector3(r(), ry(), r());
             return new MovingObjectWithResistance(new MovingObject(position));
         }
 

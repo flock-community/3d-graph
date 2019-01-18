@@ -31,7 +31,9 @@ namespace NodeTester
             Game<int> game = new Game<int>(edges, nodes);
 
             float numberOfUpdates = 30 / Game<string>.DeltaTime;
-            for(int x = 0; x < numberOfUpdates; x++)
+            for (int x = 0; x < numberOfUpdates; x++)
+                game.Update();
+            for (int x = 0; x < numberOfUpdates; x++)
                 game.Update();
         }
     }
