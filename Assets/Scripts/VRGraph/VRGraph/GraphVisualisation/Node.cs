@@ -7,6 +7,7 @@ namespace VRGraph.GraphVisualisation
     public class Node<T>
     {
         private readonly MovableObject movableObject;
+        public Vector3 Position => movableObject.Position;
         public readonly T Content;
         public readonly int Id;
         public readonly List<Edge<T>> Edges;

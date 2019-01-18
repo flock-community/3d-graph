@@ -8,18 +8,25 @@ using VRGraph.GraphVisualisation;
 namespace VRGraph {
 	public class Loader : MonoBehaviour {
 		public String resource = "test";
+		public GameObject nodePrefab;
+		public float scaleFactor = 1f;
 
 		Game<String> game;
+		Dictionary<String, GameObject> nodes;
 
 		void Start () {
 			Graph g = new Graph();
 			parseJson(g);
 			Debug.Log("Finished parsing json. Nodes: " + g.nodes.length + ", Edges: " + g.edges.length);
 			createGame(g);
+			Debug.Log("Finished creating topology");
+			render();
+			Debug.Log("Finished rendering");
 		}
 
 		void Update() {
 			this.game.Update();
+			updatePositions();
 		}
 		
 
@@ -46,6 +53,20 @@ namespace VRGraph {
 			}
 
 			this.game = new Game<String>(edges, nodes);
+		}
+
+		private void render() {
+			foreach(Node<String> node in this.game.Nodes) {
+				GameObject obj = Instantiate(nodePrefab, node.Position / scaleFactor, Quaternion.identity);
+				obj.name = node.Id;
+				nodes.Add(node.Id, obj);
+			}
+		}
+
+		private void updatePositions() {
+			foreach(Node<String> node in this.game.Nodes) {
+				nodes[node.Id].position = node.Position / scaleFactor;
+			}
 		}
 	}
 }
