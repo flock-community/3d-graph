@@ -1,0 +1,14 @@
+C:\Users\Michiel Werk\Documents\Projects\3d-graph\Assets\Scripts\VRGraph\NodeTester\bin\Debug\netcoreapp2.1\NodeTester.deps.json
+C:\Users\Michiel Werk\Documents\Projects\3d-graph\Assets\Scripts\VRGraph\NodeTester\bin\Debug\netcoreapp2.1\NodeTester.runtimeconfig.json
+C:\Users\Michiel Werk\Documents\Projects\3d-graph\Assets\Scripts\VRGraph\NodeTester\bin\Debug\netcoreapp2.1\NodeTester.runtimeconfig.dev.json
+C:\Users\Michiel Werk\Documents\Projects\3d-graph\Assets\Scripts\VRGraph\NodeTester\bin\Debug\netcoreapp2.1\NodeTester.dll
+C:\Users\Michiel Werk\Documents\Projects\3d-graph\Assets\Scripts\VRGraph\NodeTester\bin\Debug\netcoreapp2.1\NodeTester.pdb
+C:\Users\Michiel Werk\Documents\Projects\3d-graph\Assets\Scripts\VRGraph\NodeTester\bin\Debug\netcoreapp2.1\VRGraph.dll
+C:\Users\Michiel Werk\Documents\Projects\3d-graph\Assets\Scripts\VRGraph\NodeTester\bin\Debug\netcoreapp2.1\VRGraph.pdb
+C:\Users\Michiel Werk\Documents\Projects\3d-graph\Assets\Scripts\VRGraph\NodeTester\obj\Debug\netcoreapp2.1\NodeTester.csprojAssemblyReference.cache
+C:\Users\Michiel Werk\Documents\Projects\3d-graph\Assets\Scripts\VRGraph\NodeTester\obj\Debug\netcoreapp2.1\NodeTester.csproj.CoreCompileInputs.cache
+C:\Users\Michiel Werk\Documents\Projects\3d-graph\Assets\Scripts\VRGraph\NodeTester\obj\Debug\netcoreapp2.1\NodeTester.AssemblyInfoInputs.cache
+C:\Users\Michiel Werk\Documents\Projects\3d-graph\Assets\Scripts\VRGraph\NodeTester\obj\Debug\netcoreapp2.1\NodeTester.AssemblyInfo.cs
+C:\Users\Michiel Werk\Documents\Projects\3d-graph\Assets\Scripts\VRGraph\NodeTester\obj\Debug\netcoreapp2.1\NodeTester.csproj.CopyComplete
+C:\Users\Michiel Werk\Documents\Projects\3d-graph\Assets\Scripts\VRGraph\NodeTester\obj\Debug\netcoreapp2.1\NodeTester.dll
+C:\Users\Michiel Werk\Documents\Projects\3d-graph\Assets\Scripts\VRGraph\NodeTester\obj\Debug\netcoreapp2.1\NodeTester.pdb
