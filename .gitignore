@@ -49,3 +49,6 @@ sysinfo.txt
 *\.vs
 
 /Assets/Scripts/VRGraph/VRGraph/obj/
+Assets/Scripts/VRGraph/NodeTester/obj/
+
+Assets/Scripts/VRGraph/VRGraph/bin/

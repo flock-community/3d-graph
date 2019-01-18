@@ -1,6 +1,6 @@
 ﻿TODO:
 	Extract GraphVisualisation as a class library/project. (To keep using the System.Numerics.Vectors.Vector3 class and avoid other unity-fication.)
-	NodeWithMass
-		Make this extention better using a pattern (forgot the name) (we might add more than only mass and might want to use a random subset of those).
-	Node
-		Make sure there is a cap to either the speed or the force (otherwise the nodes will get too close and then speed away from eachother too fast).
+	MovableObject
+		build subclass with restriction on speed/force
+	Game
+		implement base locations

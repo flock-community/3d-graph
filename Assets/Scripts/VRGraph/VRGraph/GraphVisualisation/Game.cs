@@ -7,11 +7,13 @@ using VRGraph.Json;
 
 namespace VRGraph.GraphVisualisation
 {
-    class Game<T>
+    public class Game<T>
     {
         public static Dictionary<int, Node<T>> Nodes;
+        private static Random random;
         public float Stability = 10;
-        public bool Stable => Nodes.Values.Sum(node => node.Force.LengthSquared()) < Stability;
+        public static float DeltaTime = 0.3f;
+        //public bool Stable => Nodes.Values.Sum(node => node.Force.LengthSquared()) < Stability;
 
         public Game(List<Tuple<int, int>> edges, Dictionary<int, T> nodes)
         {
@@ -23,17 +25,26 @@ namespace VRGraph.GraphVisualisation
                     edgesDict.Add(edge.Item1, new List<int> { edge.Item2 });
             init(edgesDict, nodes);
         }
+
         public Game(Dictionary<int, List<int>> edges, Dictionary<int, T> nodes)
         {
             init(edges, nodes);
         }
-        
+
         private void init(Dictionary<int, List<int>> edges, Dictionary<int, T> nodes)
         {
-            Nodes = nodes.ToDictionary(kvp => kvp.Key, kvp => new Node<T>(kvp.Value, kvp.Key));
+            Nodes = nodes.ToDictionary(kvp => kvp.Key, kvp => new Node<T>(kvp.Value, kvp.Key, generateMovableObject(kvp.Key)));
             foreach (KeyValuePair<int, List<int>> kvp in edges)
                 Nodes[kvp.Key].InitEdges(Nodes, kvp.Value);
+        }
 
+        private MovableObject generateMovableObject(float location = -1)
+        {
+            if (random == null)
+                random = new Random();
+            float x = random.Next(0, 200) / 10000f;// location == -1 ? random.Next(0, 200)/10000 : location;
+            System.Numerics.Vector3 position = new System.Numerics.Vector3(x, 0, 0);
+            return new MovingObjectWithResistance(new MovingObject(position));
         }
 
         public void Update()
@@ -41,10 +52,9 @@ namespace VRGraph.GraphVisualisation
             foreach (int i in Nodes.Keys)
             {
                 Nodes[i].UpdateForce(Nodes.Values);
-                Nodes[i].UpdateSpeed();
             }
             foreach (int i in Nodes.Keys)
-                Nodes[i].UpdatePosition();
+                Nodes[i].UpdatePosition(DeltaTime);
         }
     }
 }

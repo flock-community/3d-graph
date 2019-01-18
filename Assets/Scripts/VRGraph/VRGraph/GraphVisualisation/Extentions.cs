@@ -11,7 +11,7 @@ namespace VRGraph.GraphVisualisation
     {
         public static Vector3 Sum<TIn>(this IEnumerable<TIn> iEnumerable, Func<TIn, Vector3> func)
         {
-            return iEnumerable.Select(func).Aggregate((a, b) => a + b);
+            return iEnumerable.DefaultIfEmpty().Select(func).Aggregate((a, b) => a + b);
         }
         public static Vector3 Sum(this IEnumerable<Vector3> iEnumerable)
         {
