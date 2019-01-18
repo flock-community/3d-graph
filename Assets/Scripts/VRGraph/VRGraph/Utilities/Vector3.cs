@@ -7,9 +7,9 @@ namespace VRGraph.Utilities
 {
     public struct Vector3
     {
-        float X;
-        float Y;
-        float Z;
+        public float X;
+        public float Y;
+        public float Z;
 
         public Vector3(float x, float y, float z)
         {
