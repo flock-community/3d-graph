@@ -188,7 +188,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 117351283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -6.44}
+  m_LocalPosition: {x: 0, y: 2.22, z: -10.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -203,6 +203,8 @@ GameObject:
   m_Component:
   - component: {fileID: 169547866}
   - component: {fileID: 169547865}
+  - component: {fileID: 169547868}
+  - component: {fileID: 169547867}
   m_Layer: 0
   m_Name: Loader
   m_TagString: Untagged
@@ -218,10 +220,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 169547864}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae2375658b1641a4fa59867807bc1799, type: 3}
+  m_Script: {fileID: 11500000, guid: c20aef4bf9514bf47a7597a052ccc986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resource: test
+  resource: test-square
+  nodePrefab: {fileID: 1667756578582390, guid: cfce5cc3a38f5ee408b34aa0e5df6895, type: 2}
+  scaleFactor: 1
+  distanceFactor: 1
 --- !u!4 &169547866
 Transform:
   m_ObjectHideFlags: 0
@@ -235,6 +240,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &169547867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 169547864}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20aef4bf9514bf47a7597a052ccc986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resource: ING/reuse_teams
+  nodePrefab: {fileID: 1667756578582390, guid: cfce5cc3a38f5ee408b34aa0e5df6895, type: 2}
+  scaleFactor: 100
+  distanceFactor: 1
+--- !u!114 &169547868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 169547864}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20aef4bf9514bf47a7597a052ccc986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resource: test-circle
+  nodePrefab: {fileID: 1667756578582390, guid: cfce5cc3a38f5ee408b34aa0e5df6895, type: 2}
+  scaleFactor: 1
+  distanceFactor: 1
 --- !u!1 &182850854
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +317,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 76008b803511a8e4c91d6f9bacc10161, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

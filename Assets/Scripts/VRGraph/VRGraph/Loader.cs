@@ -10,9 +10,12 @@ namespace VRGraph {
 		public string resource = "test";
 		public GameObject nodePrefab;
 		public float scaleFactor = 1f;
+		public float distanceFactor = 1f;
 
 		Game<string> game;
 		Dictionary<int, GameObject> nodes;
+
+		bool quit = false;
 
 		void Start () {
 			Graph g = new Graph();
@@ -25,8 +28,10 @@ namespace VRGraph {
 		}
 
 		void Update() {
-			this.game.Update();
-			updatePositions();
+			if (!quit) {
+				this.game.Update();
+				updatePositions();
+			}
 		}
 		
 
@@ -58,19 +63,38 @@ namespace VRGraph {
 		private void render() {
 			nodes = new Dictionary<int, GameObject>();
 			foreach(Node<string> node in this.game.Nodes.Values) {
-				GameObject obj = Instantiate(nodePrefab, convertVector(node.Position) / scaleFactor, Quaternion.identity);
+				GameObject obj = Instantiate(nodePrefab, convertVector(node.Position) / distanceFactor, Quaternion.identity);
+				obj.transform.localScale = obj.transform.localScale * scaleFactor;
 				obj.name = ""+node.Id;
 				nodes.Add(node.Id, obj);
 			}
+			
+			//updatePositions();
 		}
 
 		private void updatePositions() {
 			foreach(Node<string> node in this.game.Nodes.Values) {
-				nodes[node.Id].transform.position = convertVector(node.Position) / scaleFactor;
+				nodes[node.Id].transform.position = convertVector(node.Position) / distanceFactor;
+			}
+			// First finish repositioning all nodes, then draw the edges
+			foreach(Node<string> node in this.game.Nodes.Values) {
+				int i = 0;
+				GameObject source = nodes[node.Id];
+				LineRenderer line = source.GetComponent<LineRenderer>();
+				foreach(Edge<string> edge in node.Edges) {
+					GameObject target = nodes[edge.To.Id];
+					line.positionCount = i+2;
+					line.SetPosition(i++, source.transform.position);
+					line.SetPosition(i++, target.transform.position);
+				}
 			}
 		}
 
 		private UnityEngine.Vector3 convertVector(VRGraph.Utilities.Vector3 pos) {
+			if (pos.X.Equals(float.NaN) || pos.Y.Equals(float.NaN) || pos.Z.Equals(float.NaN)) {
+				quit = true;
+				throw new System.ArgumentException("NaN position");
+			}
 			return new UnityEngine.Vector3(pos.X, pos.Y, pos.Z);
 		}
 	}
