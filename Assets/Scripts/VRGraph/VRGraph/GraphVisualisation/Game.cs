@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using VRGraph.Utilities;
 
@@ -7,8 +6,8 @@ namespace VRGraph.GraphVisualisation
 {
     public class Game<T>
     {
+        private static System.Random random;
         public Dictionary<int, Node<T>> Nodes;
-        private static Random random;
         public float Stability = 10;
         public static float DeltaTime = 0.3f;
         //public bool Stable => Nodes.Values.Sum(node => node.Force.LengthSquared()) < Stability;
@@ -39,8 +38,8 @@ namespace VRGraph.GraphVisualisation
         private MovableObject generateMovableObject(float location = -1)
         {
             if (random == null)
-                random = new Random();
-            float r() => random.Next(0, 200) / 10000f;
+                random = new System.Random();
+            System.Func<float> r = () => random.Next(0, 200) / 10000f;
             Vector3 position = new Vector3(r(), r(), r());
             return new MovingObjectWithResistance(new MovingObject(position));
         }
