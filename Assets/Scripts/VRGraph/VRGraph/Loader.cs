@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GraphVisualisation;
 using VRGraph.Json;
+using VRGraph.GraphVisualisation;
 
 namespace VRGraph {
 	public class Loader : MonoBehaviour {
