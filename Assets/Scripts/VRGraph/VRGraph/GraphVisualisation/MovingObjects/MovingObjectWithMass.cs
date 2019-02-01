@@ -6,7 +6,7 @@ namespace VRGraph.GraphVisualisation
     {
         public readonly float Mass;
 
-        public MovingObjectWithMass(float mass, MovingObject movingObject) 
+        public MovingObjectWithMass(float mass, MovingObject movingObject)
             : base(movingObject)
         {
             Mass = mass;

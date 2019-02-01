@@ -42,8 +42,16 @@ namespace VRGraph.GraphVisualisation
             Force = repellingNodes.Sum(node => GetRepellingForce(node));
             Force -= attractingNodes.Sum(node => GetAttractingForce(node));
         }
-        public virtual void UpdateSpeed(float deltaTime) => Speed += Force * deltaTime;
-        public virtual void UpdatePosition(float deltaTime) => Position += Speed * deltaTime;
+        public virtual void UpdateSpeed(float deltaTime)
+        {
+            Speed += Force * deltaTime;
+        }
+
+        public virtual void UpdatePosition(float deltaTime)
+        {
+            Position += Speed * deltaTime;
+        }
+
         public override bool Equals(object obj)
         {
             MovableObject movableObject = obj as MovableObject;
@@ -51,6 +59,9 @@ namespace VRGraph.GraphVisualisation
                 return base.Equals(obj);
             return Position == movableObject.Position;
         }
-        public override int GetHashCode() => Position.GetHashCode();
+        public override int GetHashCode()
+        {
+            return Position.GetHashCode();
+        }
     }
 }

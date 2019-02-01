@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using VRGraph.GraphVisualisation;
 using VRGraph.Utilities;
 using UnityEngine;
@@ -7,7 +7,10 @@ namespace NodeTester
 {
     internal class Program
     {
-        private static void Main(string[] args) => CloseTest();
+        private static void Main(string[] args)
+        {
+            CloseTest();
+        }
 
         public static void DefaultTest()
         {

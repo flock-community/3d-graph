@@ -8,9 +8,12 @@
         {
             Item1 = item1;
         }
-        
 
-        public override string ToString() => $"Tuple <{Item1}>";
+
+        public override string ToString()
+        {
+            return "Tuple <" + Item1 + ">";
+        }
     }
     public struct Tuple<T1, T2>
     {
@@ -23,7 +26,10 @@
             Item2 = item2;
         }
 
-        public override string ToString() => $"Tuple <{Item1}, {Item2}>";
+        public override string ToString()
+        {
+            return "Tuple <" + Item1 + ", " + Item2 + ">";
+        }
     }
     public struct Tuple<T1, T2, T3>
     {
@@ -38,6 +44,9 @@
             Item3 = item3;
         }
 
-        public override string ToString() => $"Tuple <{Item1}, {Item2}, {Item3}>";
+        public override string ToString()
+        {
+            return "Tuple <" + Item1 + ", " + Item2 + ", " + Item3 + ">";
+        }
     }
 }

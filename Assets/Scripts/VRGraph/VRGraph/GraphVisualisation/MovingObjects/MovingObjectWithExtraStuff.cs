@@ -6,18 +6,39 @@ namespace VRGraph.GraphVisualisation
     {
         public override Vector3 Position
         {
-            get => movableObject.Position;
-            internal set => movableObject.Position = value;
+            get
+            {
+                return movableObject.Position;
+            }
+
+            internal set
+            {
+                movableObject.Position = value;
+            }
         }
         internal override Vector3 Speed
         {
-            get => movableObject.Speed;
-            set => movableObject.Speed = value;
+            get
+            {
+                return movableObject.Speed;
+            }
+
+            set
+            {
+                movableObject.Speed = value;
+            }
         }
         internal override Vector3 Force
         {
-            get => movableObject.Force;
-            set => movableObject.Force = value;
+            get
+            {
+                return movableObject.Force;
+            }
+
+            set
+            {
+                movableObject.Force = value;
+            }
         }
 
         protected readonly MovableObject movableObject;

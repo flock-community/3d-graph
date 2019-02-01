@@ -21,7 +21,7 @@ namespace VRGraph.GraphVisualisation
                     edgesDict[edge.Item1].Add(edge.Item2);
                 else
                     edgesDict.Add(edge.Item1, new List<int> { edge.Item2 });
-            init(edgesDict, nodes);
+            Init(edgesDict, nodes);
         }
 
         public Game(List<Tuple<int, int>> edges, Node<T>[] nodes)
@@ -32,27 +32,27 @@ namespace VRGraph.GraphVisualisation
                     edgesDict[edge.Item1].Add(edge.Item2);
                 else
                     edgesDict.Add(edge.Item1, new List<int> { edge.Item2 });
-            init(edgesDict, nodes);
+            Init(edgesDict, nodes);
         }
 
         public Game(Dictionary<int, List<int>> edges, Dictionary<int, T> nodes)
         {
-            init(edges, nodes);
+            Init(edges, nodes);
         }
 
         public Game(Dictionary<int, List<int>> edges, Node<T>[] nodes)
         {
-            init(edges, nodes);
+            Init(edges, nodes);
         }
 
-        private void init(Dictionary<int, List<int>> edges, Node<T>[] nodes)
+        private void Init(Dictionary<int, List<int>> edges, Node<T>[] nodes)
         {
             Nodes = nodes.ToDictionary(node => node.Id, node => node);
             foreach (KeyValuePair<int, List<int>> kvp in edges)
                 Nodes[kvp.Key].InitEdges(Nodes, kvp.Value);
         }
 
-        private void init(Dictionary<int, List<int>> edges, Dictionary<int, T> nodes)
+        private void Init(Dictionary<int, List<int>> edges, Dictionary<int, T> nodes)
         {
             Nodes = nodes.ToDictionary(kvp => kvp.Key, kvp => new Node<T>(kvp.Value, kvp.Key, generateMovableObject(nodes.Count, kvp.Key)));
             foreach (KeyValuePair<int, List<int>> kvp in edges)

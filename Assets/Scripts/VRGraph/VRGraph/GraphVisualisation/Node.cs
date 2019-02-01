@@ -7,11 +7,24 @@ namespace VRGraph.GraphVisualisation
     public class Node<T>
     {
         private readonly MovableObject movableObject;
-        public Vector3 Position => movableObject.Position;
+        public Vector3 Position
+        {
+            get
+            {
+                return movableObject.Position;
+            }
+        }
+
         public readonly T Content;
         public readonly int Id;
         public readonly List<Edge<T>> Edges;
-        private Node<T>[] Neighbours => Edges.Select(e => e.OtherSide(this)).ToArray();
+        private Node<T>[] Neighbours
+        {
+            get
+            {
+                return Edges.Select(e => e.OtherSide(this)).ToArray();
+            }
+        }
 
         public Node(T content, int id, MovableObject movableObject)
         {
@@ -51,6 +64,9 @@ namespace VRGraph.GraphVisualisation
                 return base.Equals(obj);
             return Id == node.Id && Content.Equals(node.Content);
         }
-        public override int GetHashCode() => Id.GetHashCode();
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
     }
 }
