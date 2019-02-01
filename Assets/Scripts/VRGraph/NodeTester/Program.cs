@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using VRGraph.GraphVisualisation;
 using VRGraph.Utilities;
+using UnityEngine;
 
 namespace NodeTester
 {
@@ -55,8 +56,8 @@ namespace NodeTester
             List<Tuple<int, int>> edges = new List<Tuple<int, int>>();
             List<Node<int>> nodes = new List<Node<int>>();
             edges.Add(new Tuple<int, int>(0, 1));
-            nodes.Add(new Node<int>(0, 0, new MovingObjectWithResistance(new MovingObject(Vector3.Zero))));
-            nodes.Add(new Node<int>(1, 1, new MovingObjectWithResistance(new MovingObject(Vector3.One * float.Epsilon))));
+            nodes.Add(new Node<int>(0, 0, new MovingObjectWithResistance(new MovingObject(Vector3.zero))));
+            nodes.Add(new Node<int>(1, 1, new MovingObjectWithResistance(new MovingObject(Vector3.one * float.Epsilon))));
 
             Game<int> game = new Game<int>(edges, nodes.ToArray());
 

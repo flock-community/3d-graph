@@ -65,7 +65,7 @@ namespace VRGraph {
 		private void render() {
 			nodes = new Dictionary<int, GameObject>();
 			foreach(Node<string> node in this.game.Nodes.Values) {
-				GameObject obj = Instantiate(nodePrefab, convertVector(node.Position) / distanceFactor, Quaternion.identity);
+				GameObject obj = Instantiate(nodePrefab, node.Position / distanceFactor, Quaternion.identity);
 				obj.transform.localScale = obj.transform.localScale * scaleFactor;
 				obj.name = ""+node.Id;
 				nodes.Add(node.Id, obj);
@@ -76,7 +76,7 @@ namespace VRGraph {
 
 		private void updatePositions() {
 			foreach(Node<string> node in this.game.Nodes.Values) {
-				UnityEngine.Vector3 targetPosition = convertVector(node.Position) / distanceFactor;
+				UnityEngine.Vector3 targetPosition = node.Position / distanceFactor;
 				nodes[node.Id].transform.position = UnityEngine.Vector3.ClampMagnitude(targetPosition, maxDistanceFromCenter);
 			}
 			// First finish repositioning all nodes, then draw the edges
@@ -91,14 +91,6 @@ namespace VRGraph {
 					line.SetPosition(i++, target.transform.position);
 				}
 			}
-		}
-
-		private UnityEngine.Vector3 convertVector(VRGraph.Utilities.Vector3 pos) {
-			if (pos.X.Equals(float.NaN) || pos.Y.Equals(float.NaN) || pos.Z.Equals(float.NaN)) {
-				quit = true;
-				throw new System.ArgumentException("NaN position");
-			}
-			return new UnityEngine.Vector3(pos.X, pos.Y, pos.Z);
 		}
 	}
 }

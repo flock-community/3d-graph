@@ -1,4 +1,4 @@
-﻿
+
 
 namespace VRGraph.GraphVisualisation
 {
@@ -13,8 +13,8 @@ namespace VRGraph.GraphVisualisation
         public override void UpdateSpeed(float deltaTime)
         {
             base.UpdateSpeed(deltaTime);
-            if (Speed.LengthSquared() > max * max)
-                Speed = Speed / Speed.Length() * max;
+            if (Speed.sqrMagnitude > max * max)
+                Speed = Speed / Speed.magnitude * max;
         }
     }
 }

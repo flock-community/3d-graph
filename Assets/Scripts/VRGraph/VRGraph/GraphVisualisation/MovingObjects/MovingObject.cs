@@ -16,17 +16,11 @@ namespace VRGraph.GraphVisualisation
             if (_other == null)
                 throw new ArgumentException("To use forces, please make sure this obj: " + this + " and the other " + other + " are of the same sub-type.");
             Vector3 difference = (Position - _other.Position);
-            return difference.LengthSquared() == 0 ? 0 : 1 / difference.LengthSquared();
+            return difference.sqrMagnitude == 0 ? 0 : 1 / difference.sqrMagnitude;
         }
         internal override float getAttractingMagnitude(MovableObject other)
         {
             return 1;
-            if (other == null)
-                return 0;
-            MovingObject _other = other as MovingObject;
-            if (_other == null)
-                throw new ArgumentException("To use forces, please make sure this obj: " + this + " and the other " + other + " are of the same sub-type.");
-            return (Position - _other.Position).LengthSquared();
         }
     }
 }
