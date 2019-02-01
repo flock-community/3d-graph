@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using VRGraph.Utilities;
+using UnityEngine;
 
 namespace VRGraph.GraphVisualisation
 {
@@ -38,10 +38,7 @@ namespace VRGraph.GraphVisualisation
             movableObject.UpdateSpeed(deltaTime);
             movableObject.UpdatePosition(deltaTime);
         }
-        public void UpdateForce(IEnumerable<Node<T>> nodes)
-        {
-            movableObject.UpdateForce(Neighbours.Select(node => node.movableObject), nodes.Select(node => node.movableObject));
-        }
+        public void UpdateForce(IEnumerable<Node<T>> nodes) => movableObject.UpdateForce(Neighbours.Select(node => node.movableObject), nodes.Select(node => node.movableObject));
         public override bool Equals(object obj)
         {
             Node<T> node = obj as Node<T>;
@@ -49,9 +46,6 @@ namespace VRGraph.GraphVisualisation
                 return base.Equals(obj);
             return Id == node.Id && Content.Equals(node.Content);
         }
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
-        }
+        public override int GetHashCode() => Id.GetHashCode();
     }
 }

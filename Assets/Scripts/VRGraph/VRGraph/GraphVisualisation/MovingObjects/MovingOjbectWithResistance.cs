@@ -1,5 +1,4 @@
 ﻿using System;
-using VRGraph.Utilities;
 
 namespace VRGraph.GraphVisualisation
 {
