@@ -12,6 +12,8 @@ namespace VRGraph {
 		public float scaleFactor = 1f;
 		public float distanceFactor = 1f;
 
+		public float maxDistanceFromCenter = 5000.0f;
+
 		Game<string> game;
 		Dictionary<int, GameObject> nodes;
 
@@ -74,7 +76,8 @@ namespace VRGraph {
 
 		private void updatePositions() {
 			foreach(Node<string> node in this.game.Nodes.Values) {
-				nodes[node.Id].transform.position = convertVector(node.Position) / distanceFactor;
+				UnityEngine.Vector3 targetPosition = convertVector(node.Position) / distanceFactor;
+				nodes[node.Id].transform.position = UnityEngine.Vector3.ClampMagnitude(targetPosition, maxDistanceFromCenter);
 			}
 			// First finish repositioning all nodes, then draw the edges
 			foreach(Node<string> node in this.game.Nodes.Values) {
