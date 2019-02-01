@@ -54,12 +54,20 @@ namespace NodeTester
         public static void CloseTest()
         {
             List<Tuple<int, int>> edges = new List<Tuple<int, int>>();
-            List<Node<int>> nodes = new List<Node<int>>();
+            Dictionary<int, int> nodes = new Dictionary<int, int>();
             edges.Add(new Tuple<int, int>(0, 1));
-            nodes.Add(new Node<int>(0, 0, new MovingObjectWithResistance(new MovingObject(Vector3.zero))));
-            nodes.Add(new Node<int>(1, 1, new MovingObjectWithResistance(new MovingObject(Vector3.one * float.Epsilon))));
+            edges.Add(new Tuple<int, int>(0, 2));
+            edges.Add(new Tuple<int, int>(0, 3));
+            edges.Add(new Tuple<int, int>(1, 2));
+            edges.Add(new Tuple<int, int>(1, 3));
+            edges.Add(new Tuple<int, int>(2, 3));
+            nodes.Add(0, 0);
+            nodes.Add(1, 1);
+            nodes.Add(2, 2);
+            nodes.Add(3, 3);
 
-            Game<int> game = new Game<int>(edges, nodes.ToArray());
+
+            Game<int> game = new Game<int>(edges, nodes);
 
             float numberOfUpdates = 30 / Game<string>.DeltaTime;
             for (int x = 0; x < numberOfUpdates; x++)

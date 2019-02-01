@@ -26,15 +26,15 @@ namespace VRGraph.GraphVisualisation
         public Vector3 GetRepellingForce(MovableObject other)
         {
             if (other == null || Position == other.Position)
-                return default(Vector3);
-            return getRepellingMagnitude(other) * (Position - other.Position);
+                return Vector3.zero;
+            return getRepellingMagnitude(other) * (Position - other.Position).normalized;
         }
         internal abstract float getRepellingMagnitude(MovableObject other);
         public Vector3 GetAttractingForce(MovableObject other)
         {
             if (other == null)
                 return default(Vector3);
-            return getAttractingMagnitude(other) * (Position - other.Position);
+            return getAttractingMagnitude(other) * (Position - other.Position).normalized;
         }
         internal abstract float getAttractingMagnitude(MovableObject other);
         public virtual void UpdateForce(IEnumerable<MovableObject> attractingNodes, IEnumerable<MovableObject> repellingNodes)

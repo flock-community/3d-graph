@@ -66,7 +66,9 @@ namespace VRGraph.GraphVisualisation
             System.Func<float> ry = () => random.Next(0, nodes);
             System.Func<float> r = () => random.Next(-nodes / 2, nodes / 2);
             Vector3 position = new Vector3(r(), r(), r());
-            return new MovingObjectWithResistance(new MovingObject(position));
+            return new MovingObjectWithMaxForceBetweenNodes(
+                    new MovingObjectWithResistance(
+                    new MovingObject(position)));
         }
 
         public void Update()

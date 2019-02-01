@@ -15,12 +15,16 @@ namespace VRGraph.GraphVisualisation
             MovingObject _other = other as MovingObject;
             if (_other == null)
                 throw new ArgumentException("To use forces, please make sure this obj: " + this + " and the other " + other + " are of the same sub-type.");
-            Vector3 difference = (Position - _other.Position);
-            return difference.sqrMagnitude == 0 ? 0 : 1 / difference.sqrMagnitude;
+            Vector3 difference = Position - _other.Position;
+            return difference.sqrMagnitude == 0 ? 0 : 1 / difference.magnitude;
         }
         internal override float getAttractingMagnitude(MovableObject other)
         {
-            return 1;
+            MovingObject _other = other as MovingObject;
+            if (_other == null)
+                throw new ArgumentException("To use forces, please make sure this obj: " + this + " and the other " + other + " are of the same sub-type.");
+            Vector3 difference = Position - _other.Position;
+            return difference.magnitude - 1;
         }
     }
 }

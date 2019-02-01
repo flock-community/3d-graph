@@ -38,7 +38,12 @@ namespace VRGraph.GraphVisualisation
             movableObject.UpdateSpeed(deltaTime);
             movableObject.UpdatePosition(deltaTime);
         }
-        public void UpdateForce(IEnumerable<Node<T>> nodes) => movableObject.UpdateForce(Neighbours.Select(node => node.movableObject), nodes.Select(node => node.movableObject));
+        public void UpdateForce(IEnumerable<Node<T>> nodes)
+        {
+            movableObject.UpdateForce(Neighbours.Select(node => node.movableObject), 
+                                        nodes.Where(node => !Neighbours.Contains(node)).Select(node => node.movableObject));
+        }
+
         public override bool Equals(object obj)
         {
             Node<T> node = obj as Node<T>;
