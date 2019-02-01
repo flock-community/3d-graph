@@ -14,12 +14,11 @@ namespace VRGraph.GraphVisualisation
 
         public override void UpdateForce(IEnumerable<MovableObject> attractingNodes, IEnumerable<MovableObject> repellingNodes)
         {
-            //TODO: Make air risistance better:
+            //TODO: Make air resistance better:
             //  - make sure if there is a big force, then the speed doesn't get too high
             //  - if the speed is too high, don't let the resistance do more then stand-still
             base.UpdateForce(attractingNodes, repellingNodes);
             Vector3 resistance = Resistance * Speed * Speed.Length();
-            Force -= resistance;
         }
         public override void UpdateSpeed(float deltaTime)
         {

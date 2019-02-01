@@ -7,6 +7,8 @@ namespace VRGraph.Utilities
 {
     public struct Vector3
     {
+        public readonly static Vector3 Zero = new Vector3(0, 0, 0);
+        public readonly static Vector3 One = new Vector3(1, 1, 1);
         public float X;
         public float Y;
         public float Z;

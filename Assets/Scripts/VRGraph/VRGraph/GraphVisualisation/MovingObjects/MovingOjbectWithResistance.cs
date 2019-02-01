@@ -3,7 +3,7 @@ using VRGraph.Utilities;
 
 namespace VRGraph.GraphVisualisation
 {
-    class MovingObjectWithResistance : MovingObjectWithExtraStuff
+    public class MovingObjectWithResistance : MovingObjectWithExtraStuff
     {
         public const float Resistance = 0.5f;
 
