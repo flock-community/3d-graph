@@ -14,6 +14,7 @@ namespace VRGraph {
 		public float distanceFactor = 1f;
 
 		public float maxDistanceFromCenter = 5000.0f;
+		public int renderRandomNodes = 0;
 
 		Game<string> game;
 		Dictionary<int, GameObject> nodes;
@@ -24,8 +25,12 @@ namespace VRGraph {
 			Graph g = new Graph();
 			parseJson(g);
 			Debug.Log("Finished parsing json. Nodes: " + g.nodes.Length + ", Edges: " + g.edges.Length);
-			//createGame(g);
-			this.game = Program.GetGameWithXNodes(60);
+			
+			if(renderRandomNodes > 0)
+				this.game = Program.GetGameWithXNodes(renderRandomNodes);
+			else
+				createGame(g);
+
 			Debug.Log("Finished creating topology");
 			render();
 			Debug.Log("Finished rendering");

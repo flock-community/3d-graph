@@ -62,7 +62,7 @@ namespace NodeTester
 
             for(int i =0; i < x; i++) { 
                 for(int j = i + 1; j < x; j++) {
-                    //if ((i + j) % 6 == 0)
+                    if ((i + j) % 6 == 0)
                         edges.Add(new Tuple<int, int>(i, j));
                 }
             }
