@@ -4,7 +4,7 @@ namespace VRGraph.GraphVisualisation
 {
     class MovingObjectWithMaxSpeed : MovingObjectWithExtraStuff
     {
-        private const float max = 10;
+        private const float max = 0.001f;
 
         public MovingObjectWithMaxSpeed(MovableObject movableObject) : base(movableObject)
         {

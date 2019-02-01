@@ -4,7 +4,7 @@ namespace VRGraph.GraphVisualisation
 {
     public class MovingObjectWithResistance : MovingObjectWithExtraStuff
     {
-        public const float Resistance = 0.5f;
+        public const float Resistance = 0.8f;
 
         public MovingObjectWithResistance(MovableObject movableObject) : base(movableObject)
         {

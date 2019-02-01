@@ -51,6 +51,30 @@ namespace NodeTester
             for (int x = 0; x < numberOfUpdates; x++)
                 game.Update();
         }
+
+        public static Game<string> GetGameWithXNodes(int x)
+        {
+            List<Tuple<int, int>> edges = new List<Tuple<int, int>>();
+            Dictionary<int, string> nodes = new Dictionary<int, string>();
+
+            for(int i =0; i < x; i++)
+                nodes.Add(i, ""+i);
+
+            for(int i =0; i < x; i++) { 
+                for(int j = i + 1; j < x; j++) {
+                    //if ((i + j) % 6 == 0)
+                        edges.Add(new Tuple<int, int>(i, j));
+                }
+            }
+            edges.Add(new Tuple<int, int>(0, 1));
+            edges.Add(new Tuple<int, int>(2, 1));
+            edges.Add(new Tuple<int, int>(3, 1));
+            edges.Add(new Tuple<int, int>(4, 1));
+
+            Game<string> game = new Game<string>(edges, nodes);
+
+            return game;
+        }
         public static void CloseTest()
         {
             List<Tuple<int, int>> edges = new List<Tuple<int, int>>();

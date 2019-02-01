@@ -4,6 +4,7 @@ using UnityEngine;
 using VRGraph.Json;
 using VRGraph.GraphVisualisation;
 using VRGraph.Utilities;
+using NodeTester;
 
 namespace VRGraph {
 	public class Loader : MonoBehaviour {
@@ -23,7 +24,8 @@ namespace VRGraph {
 			Graph g = new Graph();
 			parseJson(g);
 			Debug.Log("Finished parsing json. Nodes: " + g.nodes.Length + ", Edges: " + g.edges.Length);
-			createGame(g);
+			//createGame(g);
+			this.game = Program.GetGameWithXNodes(60);
 			Debug.Log("Finished creating topology");
 			render();
 			Debug.Log("Finished rendering");
@@ -76,8 +78,8 @@ namespace VRGraph {
 
 		private void updatePositions() {
 			foreach(Node<string> node in this.game.Nodes.Values) {
-				UnityEngine.Vector3 targetPosition = node.Position / distanceFactor;
-				nodes[node.Id].transform.position = UnityEngine.Vector3.ClampMagnitude(targetPosition, maxDistanceFromCenter);
+				Vector3 targetPosition = node.Position / distanceFactor;
+				nodes[node.Id].transform.position = Vector3.ClampMagnitude(targetPosition, maxDistanceFromCenter);
 			}
 			// First finish repositioning all nodes, then draw the edges
 			foreach(Node<string> node in this.game.Nodes.Values) {
