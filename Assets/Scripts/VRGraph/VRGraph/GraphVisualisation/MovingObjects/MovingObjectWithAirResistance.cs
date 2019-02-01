@@ -18,8 +18,11 @@ namespace VRGraph.GraphVisualisation
             //  - make sure if there is a big force, then the speed doesn't get too high
             //  - if the speed is too high, don't let the resistance do more then stand-still
             base.UpdateForce(attractingNodes, repellingNodes);
-            Vector3 resistance = Resistance * Speed * Speed.Length();
+            Vector3 resistance = Resistance * Speed * Speed.magnitude;
         }
-        public override void UpdateSpeed(float deltaTime) => base.UpdateSpeed(deltaTime);
+        public override void UpdateSpeed(float deltaTime)
+        {
+            base.UpdateSpeed(deltaTime);
+        }
     }
 }
