@@ -4,12 +4,9 @@ using VRGraph.Utilities;
 
 namespace NodeTester
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
-        {
-            CloseTest();
-        }
+        private static void Main(string[] args) => CloseTest();
 
         public static void DefaultTest()
         {

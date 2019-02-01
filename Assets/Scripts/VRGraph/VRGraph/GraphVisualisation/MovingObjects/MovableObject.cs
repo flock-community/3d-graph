@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using VRGraph.Utilities;
 
 namespace VRGraph.GraphVisualisation
@@ -38,17 +39,11 @@ namespace VRGraph.GraphVisualisation
         internal abstract float getAttractingMagnitude(MovableObject other);
         public virtual void UpdateForce(IEnumerable<MovableObject> attractingNodes, IEnumerable<MovableObject> repellingNodes)
         {
-            Force = repellingNodes.Sum(node => GetRepellingForce(node)); 
+            Force = repellingNodes.Sum(node => GetRepellingForce(node));
             Force -= attractingNodes.Sum(node => GetAttractingForce(node));
         }
-        public virtual void UpdateSpeed(float deltaTime)
-        {
-            Speed += Force * deltaTime;
-        }
-        public virtual void UpdatePosition(float deltaTime)
-        {
-            Position += Speed * deltaTime;
-        }
+        public virtual void UpdateSpeed(float deltaTime) => Speed += Force * deltaTime;
+        public virtual void UpdatePosition(float deltaTime) => Position += Speed * deltaTime;
         public override bool Equals(object obj)
         {
             MovableObject movableObject = obj as MovableObject;
@@ -56,9 +51,6 @@ namespace VRGraph.GraphVisualisation
                 return base.Equals(obj);
             return Position == movableObject.Position;
         }
-        public override int GetHashCode()
-        {
-            return Position.GetHashCode();
-        }
+        public override int GetHashCode() => Position.GetHashCode();
     }
 }

@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
-using VRGraph.Utilities;
+using UnityEngine;
 
 namespace VRGraph.GraphVisualisation
 {
-    class MovingObjectWithAirResistance : MovingObjectWithExtraStuff
-        {
-            public readonly float Resistance;
+    internal class MovingObjectWithAirResistance : MovingObjectWithExtraStuff
+    {
+        public readonly float Resistance;
 
-            public MovingObjectWithAirResistance(MovableObject movableObject, float resistance = 0.5f) : base(movableObject)
-            {
-                Resistance = resistance;
-            }
+        public MovingObjectWithAirResistance(MovableObject movableObject, float resistance = 0.5f) : base(movableObject)
+        {
+            Resistance = resistance;
+        }
 
         public override void UpdateForce(IEnumerable<MovableObject> attractingNodes, IEnumerable<MovableObject> repellingNodes)
         {
@@ -20,9 +20,6 @@ namespace VRGraph.GraphVisualisation
             base.UpdateForce(attractingNodes, repellingNodes);
             Vector3 resistance = Resistance * Speed * Speed.Length();
         }
-        public override void UpdateSpeed(float deltaTime)
-        {
-            base.UpdateSpeed(deltaTime);
-        }
+        public override void UpdateSpeed(float deltaTime) => base.UpdateSpeed(deltaTime);
     }
 }
