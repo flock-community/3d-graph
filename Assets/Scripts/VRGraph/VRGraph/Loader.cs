@@ -73,6 +73,7 @@ namespace VRGraph {
 			nodes = new Dictionary<int, GameObject>();
 			foreach(Node<string> node in this.game.Nodes.Values) {
 				GameObject obj = Instantiate(nodePrefab, node.Position / distanceFactor, Quaternion.identity);
+				obj.GetComponent<LabelController>().label = node.Content;
 				obj.transform.localScale = obj.transform.localScale * scaleFactor;
 				obj.name = ""+node.Id;
 				nodes.Add(node.Id, obj);

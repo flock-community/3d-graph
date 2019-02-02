@@ -239,6 +239,7 @@ MonoBehaviour:
   scaleFactor: 1
   distanceFactor: 1
   maxDistanceFromCenter: 5000
+  renderRandomNodes: 6
 --- !u!4 &169547866
 Transform:
   m_ObjectHideFlags: 0
@@ -270,6 +271,7 @@ MonoBehaviour:
   scaleFactor: 1
   distanceFactor: 1
   maxDistanceFromCenter: 5000
+  renderRandomNodes: 0
 --- !u!114 &169547868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,6 +289,7 @@ MonoBehaviour:
   scaleFactor: 1
   distanceFactor: 1
   maxDistanceFromCenter: 5000
+  renderRandomNodes: 0
 --- !u!1 &182850854
 GameObject:
   m_ObjectHideFlags: 0
