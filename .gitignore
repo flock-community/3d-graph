@@ -57,3 +57,5 @@ sysinfo.txt
 /Assets/Scripts/VRGraph/NodeTester/obj/
 
 Logs/
+
+*.ide-shm
