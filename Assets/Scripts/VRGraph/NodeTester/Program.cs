@@ -1,16 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using VRGraph.GraphVisualisation;
 using VRGraph.Utilities;
-using UnityEngine;
 
 namespace NodeTester
 {
     internal class Program
     {
-        private static void Main(string[] args)
-        {
-            CloseTest();
-        }
+        private static void Main(string[] args) => TestRandomNumbers(100000000);
 
         public static void DefaultTest()
         {
@@ -77,6 +75,31 @@ namespace NodeTester
                 game.Update();
             for (int x = 0; x < numberOfUpdates; x++)
                 game.Update();
+        }
+        public static void TestRandomRange(int iterations)
+        {
+            VRGraph.Utilities.Random r = new VRGraph.Utilities.Random();
+            int max = (int)Mathf.Sqrt(iterations);
+            for (int i = 0; i < iterations; i++)
+            {
+                int t = r.Next(max);
+                if (!(t < max && t >= 0))
+                    throw new System.Exception();
+            }
+        }
+        public static void TestRandomNumbers(int iterations)
+        {
+            VRGraph.Utilities.Random r = new VRGraph.Utilities.Random();
+            int[] buckets = new int[19];
+            int max = buckets.Length;
+
+            for (int i = 0; i < iterations; i++)
+                buckets[r.Next(max)]++;
+
+            float expected = iterations / (float)max;
+            float chiSquared = buckets.Sum(i => Mathf.Pow(i - expected, 2) / expected) / max;
+            if (chiSquared > 1)
+                throw new System.Exception();
         }
     }
 }
