@@ -48,7 +48,7 @@ namespace VRGraph {
 			TextAsset txt = Resources.Load(resource) as TextAsset;
 			if (txt == null) {
 				quit = true;
-				throw new ArgumentException("Cannot find resource: " + resource);
+				throw new System.ArgumentException("Cannot find resource: " + resource);
 			}
 			string json = txt.text;
 			JsonUtility.FromJsonOverwrite(json, g);
