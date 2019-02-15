@@ -27,7 +27,7 @@ namespace VRGraph {
 			Debug.Log("Finished parsing json. Nodes: " + g.nodes.Length + ", Edges: " + g.edges.Length);
 			
 			if(renderRandomNodes > 0)
-				this.game = Program.GetGameWithXNodes(renderRandomNodes);
+				game = Program.GetGameWithXNodes(renderRandomNodes);
 			else
 				createGame(g);
 
@@ -38,7 +38,7 @@ namespace VRGraph {
 
 		void Update() {
 			if (!quit) {
-				this.game.Update();
+				game.Update();
 				updatePositions();
 			}
 		}
@@ -46,6 +46,10 @@ namespace VRGraph {
 
 		private void parseJson(Graph g) {
 			TextAsset txt = Resources.Load(resource) as TextAsset;
+			if (txt == null) {
+				quit = true;
+				throw new ArgumentException("Cannot find resource: " + resource);
+			}
 			string json = txt.text;
 			JsonUtility.FromJsonOverwrite(json, g);
 		}
@@ -66,7 +70,7 @@ namespace VRGraph {
 				edges.Add(edge);
 			}
 
-			this.game = new Game<string>(edges, nodes);
+			game = new Game<string>(edges, nodes);
 		}
 
 		private void render() {
