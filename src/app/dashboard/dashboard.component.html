@@ -1,0 +1,36 @@
+<div id="threed-graph"></div>
+<div class="Menu">
+  <input type="file" (change)="fileChanged($event)" />
+
+  <div *ngIf="forceGraph">
+    <div class="option node-size">
+      <input type="radio" name="displayType" value="" checked="checked" (click)="nodes()"/>
+      <span>Nodes</span>
+      <input type="radio" name="displayType" (click)="labels()"/>
+      <span>Labels</span>
+    </div>
+    <div class="option">
+      <label id="lbl">Node size </label>
+      <input id="dashboard-node--size"
+        type="number"
+        [value]="nodeSize"
+        (change)="nodeSizeChanged($event)"
+      />
+    </div>
+    <div class="option">
+      <label id="lbl">Highlight </label>
+      <input style="max-width: 200px;" (change)="highlightChanged($event)" />
+    </div>
+    <div class="option">
+      <label id="lbl">Show dependencies of: </label>
+      <input style="max-width: 200px;" [value]="dependenciesOf" (change)="showDependencies($event)" />
+    </div>
+    <div class="option">
+      <label id="lbl">Show dependants of: </label>
+      <input style="max-width: 200px;" [value]="dependantsOf" (change)="showDependants($event)" />
+    </div>
+    <div class="option">
+      <button (click)="reload($event)" >Reload</button>
+    </div>
+  </div>
+</div>
