@@ -1,21 +1,28 @@
 {
   "nodes": [
     {
-      "id": "test-node1",
-      "label": "test-node1",
-      "group": "foo",
-      "level": 1,
-      "mass": 0.5,
-      "meta": { "repo": "flock" }
+      "id": "test-foo-1",
+      "label": "test-foo-1",
+      "group": "foo"
     },
     {
-      "id": "test-node2",
-      "label": "test-node2",
-      "group": "bar",
-      "level": 2,
-      "mass": 1,
-      "meta": { "repo": "flock" }
+      "id": "test-bar-1",
+      "label": "test-bar-1",
+      "group": "bar"
+    },
+    {
+      "id": "test-foo-2",
+      "label": "test-foo-2",
+      "group": "foo"
+    },
+    {
+      "id": "test-baz",
+      "label": "test-baz",
+      "group": "bar"
     }
   ],
-  "edges": [{ "from": "test-node1", "to": "test-node2" }]
+  "edges": [
+    { "from": "test-foo-1", "to": "test-bar-1" },
+    { "from": "test-foo-2", "to": "test-baz" }
+  ]
 }

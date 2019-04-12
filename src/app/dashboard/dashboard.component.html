@@ -1,16 +1,18 @@
 <div id="threed-graph"></div>
 <div class="Menu">
+  <label class="lbl">Graph file</label>
   <input type="file" (change)="fileChanged($event)" />
 
   <div *ngIf="forceGraph">
     <div class="option node-size">
+      <label class="lbl">Display style</label>
       <input type="radio" name="displayType" value="" checked="checked" (click)="nodes()"/>
       <span>Nodes</span>
       <input type="radio" name="displayType" (click)="labels()"/>
       <span>Labels</span>
     </div>
     <div class="option">
-      <label id="lbl">Node size </label>
+      <label class="lbl">Node size</label>
       <input id="dashboard-node--size"
         type="number"
         [value]="nodeSize"
@@ -18,15 +20,15 @@
       />
     </div>
     <div class="option">
-      <label id="lbl">Highlight </label>
-      <input style="max-width: 200px;" (change)="highlightChanged($event)" />
+      <label class="lbl">Color scheme file</label>
+      <input type="file" (change)="colorSchemeChanged($event)" />
     </div>
     <div class="option">
-      <label id="lbl">Show dependencies of: </label>
+      <label class="lbl">Show dependencies of:</label>
       <input style="max-width: 200px;" [value]="dependenciesOf" (change)="showDependencies($event)" />
     </div>
     <div class="option">
-      <label id="lbl">Show dependants of: </label>
+      <label class="lbl">Show dependants of:</label>
       <input style="max-width: 200px;" [value]="dependantsOf" (change)="showDependants($event)" />
     </div>
     <div class="option">

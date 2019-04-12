@@ -1,5 +1,6 @@
+import { readFile } from './../helper/json-file-reader';
 import { Component, OnInit } from '@angular/core';
-import { GraphParser } from '../helper/graphParser';
+import { parseData } from '../helper/graph-parser';
 import { Graph } from '../helper/graph';
 
 import ForceGraph3D from '3d-force-graph';
@@ -12,24 +13,12 @@ import SpriteText from 'three-spritetext';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  constructor() {
-    this.groups = {
-      app: { color: 'green', size: 20 },
-      app_true: { color: 'green', size: 20 },
-      app_false: { color: 'blue', size: 20 },
-      orange: { color: 'purple', size: 10 },
-      ui: { color: 'gray', size: 6 },
-      util: { color: 'gray', size: 6 },
-      guide: { color: 'gray', size: 30 },
-      web: { color: 'orange', size: 30 },
-    };
-  }
+  constructor() {}
 
-  graphParser: GraphParser;
   file: string;
   graph: Graph;
   forceGraph: any;
-  groups: any;
+  colorScheme: any;
 
   style: 'nodes' | 'labels';
   nodeSize: number;
@@ -37,7 +26,6 @@ export class DashboardComponent implements OnInit {
   dependantsOf: string;
 
   ngOnInit() {
-    this.graphParser = new GraphParser();
     this.style = 'nodes';
     this.nodeSize = 3;
     this.dependenciesOf = '';
@@ -62,12 +50,11 @@ export class DashboardComponent implements OnInit {
   reload(e) {
     this.dependantsOf = '';
     this.dependenciesOf = '';
-    this.graphParser.readFile(this.file, this.newGraph.bind(this));
+    readFile(this.file, this.graphFileRead.bind(this));
   }
 
-  newGraph(g: Graph) {
-    this.graph = g;
-    this.updateGraph();
+  colorSchemeChanged(e) {
+    readFile(e.target.files[0], this.colorSchemeFileRead.bind(this));
   }
 
   nodeSizeChanged(e) {
@@ -75,14 +62,6 @@ export class DashboardComponent implements OnInit {
     if (this.forceGraph) {
       this.forceGraph.nodeRelSize(this.nodeSize);
     }
-  }
-
-  highlightChanged(e) {
-    // const prefix = e.target.value;
-    this.forceGraph.nodeColor(node => {
-      const group = this.calculateGroup(node.id);
-      return this.groups[group.name] ? this.groups[group.name].color : 'red';
-    });
   }
 
   showDependencies(e) {
@@ -99,6 +78,31 @@ export class DashboardComponent implements OnInit {
     this.updateGraph();
   }
 
+  colorSchemeFileRead(colorScheme) {
+    this.colorScheme = colorScheme;
+    this.applyColorScheme();
+  }
+
+  applyColorScheme() {
+    if (this.colorScheme) {
+      this.forceGraph.nodeColor(node => {
+        const key = Object.keys(this.colorScheme.matchers).find(matcher =>
+          new RegExp(matcher).test(node.id),
+        );
+        return (this.colorScheme.matchers[key] || this.colorScheme.default || {}).color;
+      });
+    }
+  }
+
+  graphFileRead(g: string) {
+    this.newGraph(parseData(g));
+  }
+
+  newGraph(g: Graph) {
+    this.graph = g;
+    this.updateGraph();
+  }
+
   updateGraph() {
     switch (this.style) {
       case 'nodes':
@@ -111,21 +115,14 @@ export class DashboardComponent implements OnInit {
   }
 
   showAsNodes() {
-    this.forceGraph = ForceGraph3D()(document.getElementById('threed-graph'))
-      .graphData(this.graph.data)
-      .nodeVal(this.nodeSize)
-      .backgroundColor('white')
-      .linkColor('black')
-      .linkOpacity(0.5)
-      .nodeLabel(node => `<font color="black">${node.name}</font>`);
+    this.applyDefaultSettings();
+    this.forceGraph.nodeLabel(node => `<font color="black">${node.name}</font>`);
   }
 
   showAsLabels() {
-    this.forceGraph = ForceGraph3D()(document.getElementById('threed-graph'))
-      .graphData(this.graph.data)
-      .nodeVal(this.nodeSize)
-      .backgroundColor('white')
-      .nodeAutoColorBy('group')
+    this.applyDefaultSettings();
+    this.forceGraph
+      .nodeLabel(node => '')
       .nodeThreeObject(node => {
         // use a sphere as a drag handle
         const obj = new THREE.Mesh(
@@ -148,52 +145,13 @@ export class DashboardComponent implements OnInit {
     this.forceGraph.d3Force('charge').strength(-150);
   }
 
-  // TODO: load this from a file instead
-  calculateGroup(name) {
-    const groups = {
-      'the-guide-': {
-        name: 'guide',
-        level: 3,
-        mass: 0.2,
-      },
-      'ing-app-': {
-        name: 'app',
-        level: 1,
-        mass: 0.5,
-      },
-      'ing-orange-': {
-        name: 'orange',
-        level: 2,
-        mass: 0.75,
-      },
-      'ing-uif-': {
-        name: 'ui',
-        level: 3,
-        mass: 1,
-      },
-      'ing-uic-': {
-        name: 'ui',
-        level: 3,
-        mass: 1,
-      },
-      'ing-util-': {
-        name: 'util',
-        level: 3,
-        mass: 1,
-      },
-      'ing-kit-': {
-        name: 'util',
-        level: 3,
-        mass: 1,
-      },
-      'ing-web': {
-        name: 'web',
-        level: 3,
-        mass: 1,
-      },
-    };
+  applyDefaultSettings() {
+    this.forceGraph = ForceGraph3D()(document.getElementById('threed-graph'))
+      .graphData(this.graph.data)
+      .nodeVal(this.nodeSize)
+      .backgroundColor('white')
+      .linkOpacity(0.6);
 
-    const res = Object.keys(groups).find(key => new RegExp(key).test(name));
-    return groups[res] || {};
+    this.applyColorScheme();
   }
 }

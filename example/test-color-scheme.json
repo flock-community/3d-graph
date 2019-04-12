@@ -1,0 +1,9 @@
+{
+  "matchers": {
+    "test-foo-": { "color": "yellow" },
+    "test-bar-": { "color": "black" }
+  },
+  "default": {
+    "color": "gray"
+  }
+}

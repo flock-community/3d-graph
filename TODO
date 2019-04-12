@@ -1,0 +1,9 @@
+* Click node to get menu for show dependencies/dependants
+
+* Filter dependencies/dependants on # of hops
+* Option to filter non-dependencies/dependants with opactiy instead of removing
+
+* Highlight source node after filter
+* Auto-complete / suggest filter
+
+* Filters split off to the bottom left
