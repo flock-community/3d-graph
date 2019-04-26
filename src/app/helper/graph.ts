@@ -51,8 +51,6 @@ export class Graph {
   subGraphFrom(node: Node, relation: 'dependencies' | 'dependants') {
     const subNodes: Node[] = [];
     subNodes.push(node);
-    console.log(relation);
-    console.log(node[relation].length);
     const nodesTodo = Array.from(node[relation]);
 
     while (nodesTodo.length > 0) {

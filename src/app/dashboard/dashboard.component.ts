@@ -1,3 +1,4 @@
+import { ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
 import { readFile } from './../helper/json-file-reader';
 import { Component, OnInit } from '@angular/core';
 import { parseData } from '../helper/graph-parser';
@@ -13,23 +14,29 @@ import SpriteText from 'three-spritetext';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  constructor() {}
+  constructor(private renderer: Renderer2) {}
+
+  @ViewChild('menu') menu: ElementRef;
 
   file: string;
+  mainGraph: Graph;
   graph: Graph;
   forceGraph: any;
   colorScheme: any;
 
   style: 'nodes' | 'labels';
+  filter: 'dependencies' | 'dependants';
   nodeSize: number;
-  dependenciesOf: string;
-  dependantsOf: string;
+  filterValue: string;
+
+  mousePosX: number;
+  mousePosY: number;
+  lastNodeClicked;
 
   ngOnInit() {
     this.style = 'nodes';
     this.nodeSize = 3;
-    this.dependenciesOf = '';
-    this.dependantsOf = '';
+    this.filterValue = '';
   }
 
   nodes() {
@@ -42,14 +49,21 @@ export class DashboardComponent implements OnInit {
     this.updateGraph();
   }
 
+  dependencies() {
+    this.filter = 'dependencies';
+  }
+
+  dependants() {
+    this.filter = 'dependants';
+  }
+
   fileChanged(e) {
     this.file = e.target.files[0];
     this.reload(e);
   }
 
   reload(e) {
-    this.dependantsOf = '';
-    this.dependenciesOf = '';
+    this.filterValue = '';
     readFile(this.file, this.graphFileRead.bind(this));
   }
 
@@ -64,17 +78,44 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  doFilter(e) {
+    this.filterValue = e.target.value;
+    if (this.filterValue === '') {
+      this.graph = this.mainGraph;
+    } else {
+      this.graph = this.mainGraph.subGraphFrom(
+        this.mainGraph.findById(this.filterValue),
+        this.filter,
+      );
+    }
+    this.updateGraph();
+  }
+
+  @HostListener('document:mousemove', ['$event'])
+  onMouseMove(e) {
+    this.mousePosX = e.clientX;
+    this.mousePosY = e.clientY;
+  }
+
   showDependencies(e) {
-    this.dependantsOf = '';
-    this.dependenciesOf = e.target.value;
-    this.graph = this.graph.subGraphFrom(this.graph.findById(this.dependenciesOf), 'dependencies');
+    this.renderer.setStyle(this.menu.nativeElement, 'display', 'none');
+
+    this.filterValue = this.lastNodeClicked.id;
+    this.graph = this.mainGraph.subGraphFrom(
+      this.mainGraph.findById(this.lastNodeClicked.id),
+      'dependencies',
+    );
     this.updateGraph();
   }
 
   showDependants(e) {
-    this.dependenciesOf = '';
-    this.dependantsOf = e.target.value;
-    this.graph = this.graph.subGraphFrom(this.graph.findById(this.dependantsOf), 'dependants');
+    this.renderer.setStyle(this.menu.nativeElement, 'display', 'none');
+
+    this.filterValue = this.lastNodeClicked.id;
+    this.graph = this.mainGraph.subGraphFrom(
+      this.mainGraph.findById(this.lastNodeClicked.id),
+      'dependants',
+    );
     this.updateGraph();
   }
 
@@ -99,6 +140,7 @@ export class DashboardComponent implements OnInit {
   }
 
   newGraph(g: Graph) {
+    this.mainGraph = g;
     this.graph = g;
     this.updateGraph();
   }
@@ -150,7 +192,13 @@ export class DashboardComponent implements OnInit {
       .graphData(this.graph.data)
       .nodeVal(this.nodeSize)
       .backgroundColor('white')
-      .linkOpacity(0.6);
+      .linkOpacity(0.6)
+      .onNodeClick(node => {
+        this.renderer.setStyle(this.menu.nativeElement, 'display', 'inline');
+        this.renderer.setStyle(this.menu.nativeElement, 'top', `${this.mousePosY}px`);
+        this.renderer.setStyle(this.menu.nativeElement, 'left', `${this.mousePosX + 20}px`);
+        this.lastNodeClicked = node;
+      });
 
     this.applyColorScheme();
   }

@@ -23,16 +23,20 @@
       <label class="lbl">Color scheme file</label>
       <input type="file" (change)="colorSchemeChanged($event)" />
     </div>
-    <div class="option">
-      <label class="lbl">Show dependencies of:</label>
-      <input style="max-width: 200px;" [value]="dependenciesOf" (change)="showDependencies($event)" />
+    <div class="option node-size">
+      <label class="lbl">Filter</label>
+      <input type="radio" name="filter" value="" checked="checked" (click)="dependencies()" />
+      <span>Dependencies</span>
+      <input type="radio" name="filter" (click)="dependants()" />
+      <span>Dependants</span>
     </div>
     <div class="option">
-      <label class="lbl">Show dependants of:</label>
-      <input style="max-width: 200px;" [value]="dependantsOf" (change)="showDependants($event)" />
-    </div>
-    <div class="option">
-      <button (click)="reload($event)" >Reload</button>
+      <input style="max-width: 200px;" [value]="filterValue" (change)="doFilter($event)" />
     </div>
   </div>
+</div>
+
+<div id="menu" #menu>
+  <button (click)="showDependencies($event)">Show dependencies</button>
+  <button (click)="showDependants($event)">Show dependants</button>
 </div>
